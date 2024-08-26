@@ -1,0 +1,63 @@
+import pandas as pd
+import numpy as np
+from pandas import ExcelWriter
+
+frame = pd.read_excel("",sheet_name="")
+
+frame = frame.greoupby(['Country']).apply(lambda x: x.sort_values(['Country','State','statid'], ascending = False) if x.iloc[0]['Country']=="CA" else x.sort_values(['Country','DMA Rank','statid'], ascending=False)).reset_index(drop=True)
+
+frame.sort_values(['Country','statid'], ascending=[False,True])
+
+def sys_sample(df, sampsz):
+    """Return a systematic sample of the provided frame
+    Adds 'select' column to the given frame with a value of 1 for rows that are sampled
+    """
+    getRand = True
+    while getRand:
+         rand = np.random.uniform()
+         if rand not in [0,1]:
+              getRand = False
+
+    total = len(df)
+    sampsz = min(sampsz,total)
+
+    skip = total/sampsz
+    start = (skip*rand)
+
+    selection = []
+    for row_id in range(total):
+         if row_id == int(start):
+              print("row_id:{} start:{} skip:{} rand:{}".format(row_id, start, skip, rand))
+              selection.append(1)
+              start += skip
+         else:
+              selection.append(0)
+    df['Select'] = selection
+
+    return df
+
+samp = sys_sample(frame,167)
+
+#create status frame
+STATUS = samp
+
+FNLSMP = STATUS[STATUS['Select']==1]
+
+def freq(df,column):
+    df_freq = df[column].value_counts().to_frame().reset_index()
+    df_freq.rename(columns={column:'Frequency','index':column},inplace=True)
+    freq_total = df_freq['Frequency'].sum()
+    df_freq['Percent']= df_freq['Frequency']/freq_total*100
+    df_freq = df_freq.sort_values(by=column, ascending=False)
+    return df_freq
+
+
+#check frequencies of variables from frame
+county_frequ = freq(frame,'Country')
+
+
+
+filename = "freqs_X.xlsx"
+writer = ExcelWriter(filename)
+county_freq.to_excel(writer, 'country', index=False)
+writer.save()
