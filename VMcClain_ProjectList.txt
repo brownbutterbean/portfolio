@@ -1,0 +1,59 @@
+March 2024 - June 2024 Nielsen - Scarborough
+Phone Market Migration Program- Custom Hispanic Survey and Panel Reuse Projects (50% dedicated)
+Responsible for code changes and schedule to implement updates to survey methodology 
+- Gathered requirements and assessed feasibility of updates to current code and methodology for address selections
+- Created code and new database table used to store selections for reuse with new identifier to protect PII
+- Performed testing to find points of failure and track latency in the new process
+- Worked with vendor to determine requirements and schedule needed to deliver custom markets as they transitioned from phone recruitment to address based sampling
+
+November 2023 - March 2024 Nielsen - Scarborough
+Process Improvement - Invalids Code Development (50% dedicated)
+Responsible for code changes to implement updates to survey methodology
+- Gathered requirements and assessed feasibility of updates to current code
+- Implemented code that included generating a report used to show impact of changes to return rate with additional respondents
+- Changes in code aided saving $30K for the product
+
+January 2022 - March 2023 Nielsen - US Television Audience Measurement
+US TV Product Accreditation Program - Targeted Recruitment Methods (30% dedicated)
+Responsible for collecting and analyzing recruitment data and providing insights to stakeholders
+- Gathered requirements and worked with stakeholders to develop a tracking system
+- Developed process to clean data and created a Tableau dashboard to present weekly findings
+- Met with cross functional team to discuss insights and review changes in the data
+- Made updates to data processing and dashboard as needed. 
+- Product accreditation was restored in December of 2023
+
+March 2022  Nielsen - US Television Audience Measurement
+Business case development - Telephone Pre-screener Use Case (100% dedicated)
+Responsible for data analysis to understand feasibility of leveraging panel questionnaire data to determine likelihood of recruitment
+- Analyzed data collected by the questionnaire to determine if persons in a home would meet recruitment criteria prior to fielding 
+- Determined presence of landline phone and ethnicity were good indicators of a home with characteristics of interest to clients 
+
+February 2015- March 2016 Nielsen - Digital Audience Measurement
+Total Content Ratings Program - US and Australia Total Content Ratings (50% Dedicated)
+Responsible for implementation of two products in Australia (Electronic Mobile Measurement and Total Content Ratings)
+- Provided budget, schedule, and risk assessment for Operations to add both products to current workflow
+- Estimated $120K for onboarding and training of analysts; one in Australia to assist with quality assurance checks using local knowledge, and an additional US analyst was needed for TCR processing
+- Worked with stakeholders to manage changes to scope; a data migration for all EMM markets after review of test data was deemed in scope and prioritized to meet additional client requests
+- Developed new SOP and training for handling TCR data and delivery to Client Services
+- Evaluated impacts from change control submissions and completed sign off for each phase gate
+
+November 2014 - January 2015 Nielsen - Digital Audience Measurement
+Process Improvement - GUI development for Operations Quality Assurance. (100% dedicated)
+Responsible for transitioning Operations teams to new user interface for data exploration and quality checks/exclusion submissions. 
+- Performed UAT and training; submitted changes through change control for updates to UI performance
+
+March 2014 - June 2014 Nielsen - Digital Audience Measurement
+Process Improvement - Time reduction for NetView Quality checks (100% dedicated)
+Responsible for reducing time to complete quality checks on data across seven markets for the NetView product
+- Supplied data to build business case for sponsor/stakeholders 
+- Tracked observations for assigned test and control markets
+- Analyzed observations across three months to determine if changes in processing time was statistically significant as well as impact to data quality
+- Reduced processing time by 35% leading to faster turnarounds for both weekly and monthly deliverables
+
+January 2014 - April 2014 Nielsen - Digital Audience Measurement
+Process Improvement - AGF Quality Improvements (100% dedicated)
+Responsible for updating SOP and quality checks to ensure data integrity for client data feed
+- Collaborated with cross functional task force to complete root cause analysis determining sources of data issues
+- Assessed risk of additional work on Operations assisting with early error detection
+- Developed requirements and SOP for quality checks, including communications plan for escalations
+
