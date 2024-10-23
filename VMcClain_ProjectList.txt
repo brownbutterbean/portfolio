@@ -19,7 +19,7 @@ Responsible for collecting and analyzing recruitment data and providing insights
 - Gathered requirements and worked with stakeholders to develop a tracking system
 - Developed process to clean data and created a Tableau dashboard to present weekly findings
 - Met with cross functional team to discuss insights and review changes in the data
-- Made updates to data processing and dashboard as needed. 
+- Made updates to data processing and dashboard as needed 
 - Product accreditation was restored in December of 2023
 
 March 2022  Nielsen - US Television Audience Measurement
