@@ -1,0 +1,133 @@
+def mkt_file_target_filler(mk_df,conn):
+	df = mk_df.copy()
+	for i in range(0,len(mkt_df)):
+		sql = '''\
+			SELECT CreationDate, MktCode, [grouping]\n \
+			FROM Targets\n \
+			WHERE MktCode in ({}) \n \
+			GROUP BY creationdate, mktcode [grouping]\n \
+			'''.formate(mkt_df-'MktCode'][i])
+		sql_df = pd.read_sql(sql, conn)
+		df.loc[[i], ['TargetCreationDate']]= max(sql_df['CreationDate]).strftime('%y-%m%d %H:%M:%S')
+return df
+
+mkt_df = mkt_file_target_filler(mkt_df, conn)
+mkt_df. sort_values('MktCode', inplace =True)
+mkt_df = mkt_df.reset_index(drop = True)
+
+def get_invalids()"
+	return''' SELECT A.*, B.Return FROM
+		(SELECT 
+			CASE WHEN CAST (SUBSTRING(E.surveynumber, 2,1) AS INT) < 6 THEN 'R' + SUBSTRING(E.surveynumber 3,1)+'2'
+				ELSE 'R' + SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END AS Release
+			,D.MktCode
+			,E.MarketName
+			,G.SampleSource AS SampleSource
+			, CONCAT(D.MktCode, CASE WHEN dc.metroflag =1 THEN 'M' ELSE 'B' END, dc.groupcode) AS TrueCode
+			,CASE WHEN 
+				G. weightingtype = 0 THEN 'Regular'
+				WHEN G.weightingtype = 1 THEN 'Black'
+				WHEN G.weightingtype = 2 THEN 'Hispanic'
+				WHEN G.weightingtype = 3 THEN 'ADULT 18-24'
+				WHEN G.weightingtype = 4 THEN 'M 18-24'
+				WHEN G.weightingtype = 5 THEN 'M 25-34'
+				WHEN G.weightingtype = 6 THEN 'F 18-24'
+				WHEN G.weightingtype = 7 THEN 'F 25-34'
+			END AS TrueGType
+			,COUNT(E.surveynumber) AS Gross
+			FROM ReportTable E
+				,TotalSample G
+				,County C
+				,DCounty dc
+				,MKT D
+			WHERE 1=1
+			AND C.FipsStCty = E.fipscode
+			AND dc.Id = D.id
+			AND dc.CountyId = C.CountyId
+			AND SUBSTRING(E.surveynumber,4,3) in (069,042)
+			AND D.StartDate = C.StartDate
+				AND D.StartDate = '2024-01-01'
+			AND G.repsondentNumber = E.respondentNumber
+			AND CASE WHEN
+				CAST(SUBSTRING(E.surveynumber, 2,1) AS INT) <6 THEN 'R' + SUBSTRING(E.surveynumber,3,1)+'2'
+				ELSE 'R' + (SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END IN ('R124')
+			AND E.Mailed =1
+				GrOUP BY
+				CASE WHEN
+				CAST(SUBSTRING(E.surveynumber, 2,1) AS INT) <6 THEN 'R' + SUBSTRING(E.surveynumber,3,1)+'2'
+				ELSE 'R' + (SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END 
+				,E.MarketName
+				,D.MktCode
+				,G.SampleSource
+				,CONCAT(D.MktCode, CASE WHEN dc.metroflag =1 THEN 'M' ELSE 'B' END, dc.groupcode)
+				,CASE WHEN 
+				G. weightingtype = 0 THEN 'Regular'
+				WHEN G.weightingtype = 1 THEN 'Black'
+				WHEN G.weightingtype = 2 THEN 'Hispanic'
+				WHEN G.weightingtype = 3 THEN 'ADULT 18-24'
+				WHEN G.weightingtype = 4 THEN 'M 18-24'
+				WHEN G.weightingtype = 5 THEN 'M 25-34'
+				WHEN G.weightingtype = 6 THEN 'F 18-24'
+				WHEN G.weightingtype = 7 THEN 'F 25-34'
+				END) AS A
+		FULL OUTER JOIN
+		(SELECT 
+			CASE WHEN CAST (SUBSTRING(E.surveynumber, 2,1) AS INT) < 6 THEN 'R' + SUBSTRING(E.surveynumber 3,1)+'2'
+				ELSE 'R' + SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END AS Release
+			,D.MktCode
+			,E.MarketName
+			,G.SampleSource AS SampleSource
+			, CONCAT(D.MktCode, CASE WHEN dc.metroflag =1 THEN 'M' ELSE 'B' END, dc.groupcode) AS TrueCode
+			,CASE WHEN 
+				G.weightingtype = 1 THEN 'Black'
+				WHEN G.weightingtype = 2 THEN 'Hispanic'
+				WHEN G.weightingtype = 3 THEN 'ADULT 18-24'
+				WHEN E.[male1824]=1 AND G.weightingtype in (4,5,6,7) THEN 'M 18-24'
+				WHEN E.[male2534]=1 AND G.weightingtype in (4,5,6,7) THEN 'M 25-34'
+				WHEN E.[female1824]=1 AND G.weightingtype in (4,5,6,7) THEN 'F 18-24'
+				WHEN E.[female2534]=1 AND G.weightingtype in (4,5,6,7) THEN 'F 25-34'
+				ELSE 'Regular'
+			END AS TrueGType
+			,COUNT(E.surveynumber) AS Returns
+			FROM ReportTable E
+				,TotalSample G
+				,County C
+				,DCounty dc
+				,MKT D
+			WHERE 1=1
+			AND C.FipsStCty = E.fipscode
+			AND dc.Id = D.id
+			AND dc.CountyId = C.CountyId
+			AND SUBSTRING(E.surveynumber,4,3) in (069,042)
+			AND D.StartDate = C.StartDate
+				AND D.StartDate = '2024-01-01'
+			AND G.repsondentNumber = E.respondentNumber
+			AND CASE WHEN
+				CAST(SUBSTRING(E.surveynumber, 2,1) AS INT) <6 THEN 'R' + SUBSTRING(E.surveynumber,3,1)+'2'
+				ELSE 'R' + (SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END IN ('R124')
+			AND E.Mailed =1
+				GrOUP BY
+				CASE WHEN
+				CAST(SUBSTRING(E.surveynumber, 2,1) AS INT) <6 THEN 'R' + SUBSTRING(E.surveynumber,3,1)+'2'
+				ELSE 'R' + (SUBSTRING(E.surveynumber,3,1)+'1'+ SUBSTRING(E.surveynumber,2,1) END 
+				,E.MarketName
+				,D.MktCode
+				,G.SampleSource
+				,CONCAT(D.MktCode, CASE WHEN dc.metroflag =1 THEN 'M' ELSE 'B' END, dc.groupcode)
+				,CASE WHEN 
+				G.weightingtype = 1 THEN 'Black'
+				WHEN G.weightingtype = 2 THEN 'Hispanic'
+				WHEN G.weightingtype = 3 THEN 'ADULT 18-24'
+				WHEN E.[male1824]=1 AND G.weightingtype in (4,5,6,7) THEN 'M 18-24'
+				WHEN E.[male2534]=1 AND G.weightingtype in (4,5,6,7) THEN 'M 25-34'
+				WHEN E.[female1824]=1 AND G.weightingtype in (4,5,6,7) THEN 'F 18-24'
+				WHEN E.[female2534]=1 AND G.weightingtype in (4,5,6,7) THEN 'F 25-34'
+				ELSE 'Regular'
+
+				END) AS B
+		ON A.Release=B.Release
+		AND A.MarketName = B.MarketName
+		AND A.MktCode = B.MktCode
+		AND A.TrueCode = B.TrueCode
+		AND A.SampleSource = B.SampleSource
+		AND A.TrueGType = B.TrueGType'''
